@@ -26,22 +26,20 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage(CREATE_MESSAGE)
   handleMessage(@MessageBody() createMessageDto: CreateMessageDto, @ConnectedSocket() client: Socket){
     const message = this.chatService.create(createMessageDto);
-    this.server.emit('message', {
+    client.broadcast.emit('message', {
       name: message.name,
       text: message.text
     })
   }
 
-  @SubscribeMessage(ALL_MESSAGES)
-  findAll(){
-    return this.chatService.findAll()
-  }
+  // @SubscribeMessage(ALL_MESSAGES)
+  // findAll(@ConnectedSocket() client: Socket){
+  //   const history = this.chatService.findAll()
+  //   client.emit('allMessages', history)
+  // }
 
   @SubscribeMessage(TYPING)
-  typing(
-    @MessageBody() data: { isTyping: boolean; name: string }, 
-    @ConnectedSocket() client: Socket
-    ) {
+  typing(@MessageBody() data: { isTyping: boolean; name: string }, @ConnectedSocket() client: Socket) {
     client.broadcast.emit('typing', {
       name: data.name,
       isTyping: data.isTyping

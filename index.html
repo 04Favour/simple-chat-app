@@ -77,11 +77,12 @@
         });
 
         socket.on('message', (data) => {
-            const currentUserName = nameInput.value.trim().toLowerCase();
-            // Display message only if it's from someone else
-            if (data.name !== currentUserName) {
-                appendMessage(data.name, data.text, false);
-            }
+            // const currentUserName = nameInput.value.trim()
+            // // Display message only if it's from someone else
+            // if (data.name !== currentUserName) {
+            //     appendMessage(data.name, data.text, false);
+            // }
+            appendMessage(data.name, data.text, false)
         });
 
         // Listen for typing from others

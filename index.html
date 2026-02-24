@@ -40,14 +40,22 @@
         </div>
     </div>
 
-    <script>
+<script 
+  async
+  src="http://localhost:3000/tracker.js" 
+  data-ackee-server="http://localhost:3000" 
+  data-ackee-domain-id="07e0644b-190f-4031-8121-25dbeb187e3b" 
+  data-ackee-opts='{ "ignoreLocalhost": false, "ignoreOwnVisits": false }'>
+</script>
+
+<script>
         // --- CONFIGURATION ---
         const CREATE_MESSAGE = 'createMessage'; 
         const TYPING = 'typing';
         let isNameLocked = false;
         let typingTimeout;
         
-        const socket = io('http://localhost:3000'); 
+        const socket = io('http://localhost:3001'); 
 
         const messagesContainer = document.getElementById('messages-container');
         const messageInput = document.getElementById('messageInput');
